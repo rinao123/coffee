@@ -1,0 +1,140 @@
+.authorize {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.authorize-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+.authorize-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 618rpx;
+  background-color: #ffffff;
+  z-index: 2000;
+  border-radius: 10rpx;
+}
+
+.authorize-title {
+  margin-top: 30rpx;
+  margin-bottom: 22rpx;
+  line-height: 50rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.authorize-separater {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(151, 151, 151, 0.1);
+}
+
+.authorize-logo {
+  margin-top: 40rpx;
+  width: 72rpx;
+  height: 72rpx;
+}
+
+.authorize-content-text {
+  margin-top: 18rpx;
+  margin-bottom: 22rpx;
+  line-height: 44rpx;
+  font-size: 32rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.authorize-separater2 {
+  width: 458rpx;
+  height: 1px;
+  background-color: rgba(151, 151, 151, 0.1);
+}
+
+.authorize-tips {
+  margin-top: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authorize-tips2 {
+  margin-top: 8rpx;
+  margin-bottom: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authorize-circle {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.authorize-tips-text {
+  margin-left: 10rpx;
+  line-height: 36rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.authorize-separater3 {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(151, 151, 151, 0.1);
+}
+
+.authorize-btns {
+  display: flex;
+  width: 100%;
+  height: 92rpx;
+}
+
+.btn-authorize-cancel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(151, 151, 151, 0.1);
+}
+
+.btn-authorize-cancel-text {
+  line-height: 48rpx;
+  font-size: 34rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.btn-authorize-confirm {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.btn-authorize-confirm::after {
+  border: 0;
+}
+
+.btn-authorize-confirm-text {
+  line-height: 48rpx;
+  font-size: 34rpx;
+  color: #1aad19;
+}

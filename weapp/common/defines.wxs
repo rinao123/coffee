@@ -1,0 +1,15 @@
+module.exports.SHIPPING_TYPE = {
+  WAITING: 1,
+  ORDER: 2,
+  DELIVERY: 3
+}
+
+module.exports.ORDER_STATUS = {
+  UNPAID: 0,
+  WAIT_FOR_MAKING: 1,
+  MAKING: 2,
+  DISPATCHING: 3,
+  DELIVERING: 4,
+  FINISH: 5,
+  ARCHIVE: 6
+}

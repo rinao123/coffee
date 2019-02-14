@@ -1,0 +1,159 @@
+<!--pages/balance/balance.wxml-->
+<import src="../../templates/goods/goods.wxml" />
+<wxs src="../../common/defines.wxs" module="defines" />
+<wxs src="../../utils/util.wxs" module="util" />
+
+<view class="balance">
+  <view class="navigation">
+    <view class="btn-navigation-back" catch:tap="onBackTap">
+      <image class="back-icon" src="/resources/images/back.png" />
+    </view>
+    <text class="navigation-title">账单结算</text>
+  </view>
+  <view class="balance-bg">
+    <view class="balance-info">
+      <image class="logo" src="/resources/images/logo.png" />
+      <view class="shipping-list">
+        <view class="shipping"  data-shipping-type="{{defines.SHIPPING_TYPE.WAITING}}" catch:tap="onShippingTypeTap">
+          <block wx:if="{{shippingType == defines.SHIPPING_TYPE.WAITING}}">
+            <image class="radio" src="/resources/images/radio.png" />
+            <text class="shipping-name-selected">WeStore取货</text>
+          <text class="tips" wx:if="{{shippingType == defines.SHIPPING_TYPE.WAITING}}">(预计需等候10分钟以上)</text>
+          </block>
+          <block wx:else>
+            <view class="not-select" />
+            <text class="shipping-name">WeStore取货</text>
+          </block>
+        </view>
+        <view class="shipping"  data-shipping-type="{{defines.SHIPPING_TYPE.DELIVERY}}" catch:tap="onShippingTypeTap">
+          <block wx:if="{{shippingType == defines.SHIPPING_TYPE.DELIVERY}}">
+            <view class="delivery">
+              <view class="delivery-title">
+                <image class="radio" src="/resources/images/radio.png" />
+                <text class="shipping-name-selected">外卖</text>
+                <text class="tips" wx:if="{{deliveryTimeStr}}">({{deliveryTimeStr}})</text>
+              </view>
+              <view class="user-info">
+                <view class="user-info-address-title">
+                  <text class="user-info-title-text">仅限腾讯员工使用</text>
+                </view>
+                <picker mode="selector" bindchange="onAddressPickerChange" value="{{addressPickerIndex}}" range="{{addressPickerValue}}">
+                  <view class="delivery-address">
+                    <block wx:if="{{addressValue}}">
+                      <text class="delivery-address-text">{{addressValue}}</text>
+                    </block>
+                    <block wx:else>
+                      <text class="delivery-address-placeholder">选择办公楼层</text>
+                    </block>
+                    <view class="delivery-address-right">
+                      <image class="delivery-address-arrow" src="/resources/images/arrow_down.png" />
+                    </view>
+                  </view>
+                </picker>
+                <input class="mobile-input" placeholder-class="mobile-placeholder" type="number" value="{{mobile}}" maxlength="11" placeholder="输入联系电话" bindinput="onMobileInput" bindblur="onMobileBlur" />
+                <text class="mobile-error" wx:if="{{isMobileError}}">输入有误</text>
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <block wx:if="{{totalPrice >= 8}}">
+              <view class="not-select" />
+              <text class="shipping-name">外卖</text>
+            </block>
+            <block wx:else>
+              <view class="not-select-disable" />
+              <text class="shipping-name-disable">外卖(订单满￥8起送)</text>
+            </block>
+          </block>
+        </view>
+        <view class="shipping"  data-shipping-type="{{defines.SHIPPING_TYPE.ORDER}}" catch:tap="onShippingTypeTap">
+          <block wx:if="{{shippingType == defines.SHIPPING_TYPE.ORDER}}">
+            <view class="order">
+              <view class="order-title">
+                <image class="radio" src="/resources/images/radio.png" />
+                <text class="shipping-name-selected">预约取货</text>
+              </view>
+              <picker mode="multiSelector" bindchange="onDatePickerChange" value="{{datePickerIndex}}" range="{{datePickerValue}}">
+                <view class="order-date">
+                  <block wx:if="{{orderDateStr}}">
+                    <text class="order-date-text">{{orderDateStr}}</text>
+                  </block>
+                  <block wx:else>
+                    <text class="order-date-placeholder">预约日期</text>
+                  </block>
+                  <view class="order-date-right">
+                    <image class="order-date-arrow" src="/resources/images/arrow_down.png" />
+                  </view>
+                </view>
+              </picker>
+              <picker mode="multiSelector" bindchange="onTimePickerChange" value="{{timePickerIndex}}" range="{{timePickerValue}}">
+                <view class="order-time">
+                  <block wx:if="{{orderTimeStr}}">
+                    <text class="order-time-text">{{orderTimeStr}}</text>
+                  </block>
+                  <block wx:else>
+                    <text class="order-time-placeholder">预约时间</text>
+                  </block>
+                  <view class="order-time-right">
+                    <image class="order-time-arrow" src="/resources/images/arrow_down.png" />
+                  </view>
+                </view>
+              </picker>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="not-select" />
+            <picker mode="multiSelector" bindchange="onTimePickerChange" value="{{timePickerIndex}}" range="{{timePickerValue}}">
+            </picker>
+            <text class="shipping-name">预约取货</text>
+          </block>
+        </view>
+      </view>
+      <view class="remark">
+        <input class="remark-input" placeholder-class="remark-placeholder" placeholder="备注..." bindinput="onRemarkInput" />
+      </view>
+      <view class="dashed-view">
+        <view class="semi-circle-right" />
+        <view class="dashed-line" />
+        <view class="semi-circle-left" />
+      </view>
+      <view class="point" wx:if="{{point > 0}}" catch:tap="onUsePointTap">
+        <view class="point-select">
+          <block wx:if="{{usePoint}}">
+            <image class="radio" src="/resources/images/radio.png"  />
+          </block>
+          <block wx:else>
+            <view class="not-select" />
+          </block>
+          <text class="point-title">当前积分{{point}}分，可抵扣{{point/10}}元</text>
+        </view>
+      </view>
+      <view class="goods-total-price">
+        <text class="goods-total-price-title">合计:</text>
+        <text class="goods-total-price-num">￥{{util.formatPrice(payPrice)}}</text>
+        <text class="goods-total-origin-price" wx:if="{{usePoint}}">￥{{util.formatPrice(totalPrice)}}</text>
+        <view class="goods-total-num-right">
+          <text class="goods-total-num-text">共{{totalNum}}件商品</text>
+        </view>
+      </view>
+      <view class="goods-list" wx:if="{{isShowGoods}}">
+        <block wx:for="{{carts}}" wx:key="cartId">
+          <template is="goods-item" data="{{name:item.goods_name,sku:item.sku_name,price:item.price,num:item.num,picture:item.goods_picture}}" />
+          <view class="separater" wx:if="{{index < carts.length - 1}}" />
+        </block>
+      </view>
+      <view class="goods-list-bottom" />
+    </view>
+  </view>
+  <view class="white" />
+  <view class="bottom">
+    <view class="pay-bottom">
+      <form bindsubmit="onPayTap" report-submit="{{true}}">
+        <button class="btn-pay" formType="submit">
+          <text class="btn-pay-text">付款</text>
+        </button>
+      </form>
+    </view>
+    <view class="iphone-x-bottom" wx:if="{{isIphoneX}}" />
+  </view>
+</view>

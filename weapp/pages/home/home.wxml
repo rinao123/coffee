@@ -1,0 +1,234 @@
+<!--index.wxml-->
+<import src="../../templates/authorize/authorize.wxml" />
+<wxs src="../../utils/util.wxs" module="util" />
+
+<view class="index">
+  <swiper indicator-dots="{{canNavigateMiniProgram}}" indicator-color="rgba(255, 255, 255, 0.2)" indicator-active-color="rgba(255, 255, 255, 0.5)" class="swiper">
+    <swiper-item>
+      <view class="swiper-item">
+        <image class="banner" src="/resources/images/banner1.jpg" />
+      </view>
+    </swiper-item>
+    <swiper-item wx:if="{{canNavigateMiniProgram}}">
+      <navigator target="miniProgram" open-type="navigate" app-id="wx13cd90577cccdba5" version="release">
+        <view class="swiper-item">
+          <image class="banner" src="/resources/images/banner2.jpg" />
+        </view>
+      </navigator>
+    </swiper-item>
+  </swiper>
+  <view class="menu">
+    <scroll-view class="category-list" scroll-y>
+      <block wx:if="{{histories.length > 0}}">
+        <block wx:if="{{curCategory == 0}}">
+          <view class="category-selected" data-category-id="0" catch:tap="onCategoryTap">
+            <image class="category-image" src="/resources/images/history_selected.png" />
+          </view>
+        </block>
+        <block wx:else>
+          <view class="category" data-category-id="0" catch:tap="onCategoryTap">
+            <image class="category-image" src="/resources/images/history.png" />
+          </view>
+        </block>
+      </block>
+      <block wx:for="{{categories}}" wx:key="index">
+        <block wx:if="{{item.id == curCategory}}">
+          <view class="category-selected" data-category-id="{{item.id}}" catch:tap="onCategoryTap">
+            <image class="category-image" src="{{item.categoryPictureSelected}}" />
+          </view>
+        </block>
+        <block wx:else>
+          <view class="category" data-category-id="{{item.id}}" catch:tap="onCategoryTap">
+            <image class="category-image" src="{{item.categoryPicture}}" />
+          </view>
+        </block>
+      </block>
+    </scroll-view>
+    <scroll-view class="goods-list" scroll-y scroll-top="{{goodsScrollTop}}" bindscroll="onGoodsListScroll" bindscrolltolower="onGoodsListScrollToLower">
+      <block wx:if="{{histories.length > 0}}">
+        <view class="goods-list-item" id="history">
+          <view class="category-name">我点过的</view>
+          <view class="histories">
+            <block wx:for="{{histories}}" wx:key="orderGoodsIs">
+              <view class="history" data-order-goods-id="{{item.orderGoodsId}}" catch:tap="onHistoryTap">
+                <image class="history-picture" src="{{item.historyPicture}}" />
+                <text class="history-goods-name">{{item.goodsName}}</text>
+                <text class="history-goods-price">¥{{util.formatPrice(item.price)}}</text>
+                <text class="history-goods-sku">{{item.skuName}}</text>
+                <view class="btn-history-buy">
+                  <text class="btn-history-buy-text">立即购买</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+      <block wx:for="{{categories}}" wx:for-item="category" wx:key="id">
+        <block wx:if="{{category.goodsList.length > 0}}">
+          <block wx:if="{{index < categories.length - 1}}">
+            <view class="goods-list-item" id="goods-list-{{category.id}}">
+              <view class="category-name">{{category.name}}</view>
+              <block wx:for="{{category.goodsList}}" wx:for-index="goodsIndex" wx:for-item="goods" wx:key="id">
+                <view class="goods" data-goods-id="{{goods.id}}" catch:tap="onSelectTap">
+                  <image class="goods-picture" src="{{goods.picture}}" />
+                  <view class="goods-mid">
+                    <text class="goods-name">{{goods.goods_name}}</text>
+                    <text class="sku-name">{{goods.sub_title}}</text>
+                    <text class="price">¥{{util.formatPrice(goods.promotion_price)}}</text>
+                  </view>
+                  <view class="btn-sku">
+                    <image class="btn-sku-icon" src="/resources/images/add.png" />
+                  </view>
+                </view>
+                <view class="goods-separater" wx:if="{{goodsIndex < category.goodsList.length - 1}}" />
+              </block>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="goods-list-item" id="goods-list-{{category.id}}" style="min-height:{{goodsListItemMinHeight}}px">
+              <view class="category-name">{{category.name}}</view>
+              <block wx:for="{{category.goodsList}}" wx:for-index="goodsIndex" wx:for-item="goods" wx:key="id">
+                <view class="goods" data-goods-id="{{goods.id}}" catch:tap="onSelectTap">
+                  <image class="goods-picture" mode="aspectFill" src="{{goods.picture}}" />
+                  <view class="goods-mid">
+                    <text class="goods-name">{{goods.goods_name}}</text>
+                    <text class="sku-name">{{goods.keywords}}</text>
+                    <text class="price">¥{{util.formatPrice(goods.promotion_price)}}</text>
+                  </view>
+                  <view class="btn-sku">
+                    <image class="btn-sku-icon" src="/resources/images/add.png" />
+                  </view>
+                </view>
+                <view class="goods-separater" wx:if="{{goodsIndex < category.goodsList.length - 1}}" />
+              </block>
+            </view>
+          </block>
+        </block>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="bottom" wx:if="{{carts.length > 0}}" catch:tap="onCartTap">
+    <view class="btn-cart">
+      <image class="btn-cart-icon" src="/resources/images/cart.png" />
+      <view class="badger">
+        <text class="badger-text">{{cartNum}}</text>
+      </view>
+    </view>
+    <view class="bottom-separater" />
+    <text class="total-price-title">合计:</text>
+    <text class="total-price-num">￥{{util.formatPrice(totalPrice)}}</text>
+    <view class="bottom-right">
+      <view class="btn-balance" catch:tap="onBalanceTap">
+        <text class="btn-balance-text">下单</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-select" wx:if="{{isShowGoodsSelectBg}}">
+    <view class="goods-select-bg {{isShowGoodsSelect ? 'show' : ''}}" catch:tap="onSelectClose" catchtouchmove="true" />
+    <view class="goods-select-modal {{isShowGoodsSelect ? 'show' : ''}}" catchtouchmove="true">
+      <image class="goods-bg" src="{{curGoods.picture}}" mode="aspectFill" catch:tap="onSelectClose" />
+      <image class="close" src="/resources/images/close.png" catch:tap="onSelectClose" />
+      <text class="goods-select-goods-name">{{curGoods.goods_name}}</text>
+      <view class="spec-list">
+        <block wx:for="{{curGoods.goods_spec}}" wx:for-item="spec" wx:key="spec_id">
+          <view class="spec">
+            <text class="spec-name">{{spec.spec_name}}</text>
+            <view class="spec-right">
+              <view class="spec-values">
+                <block wx:for="{{spec.spec_values}}" wx:for-item="specValue" wx:key="spec_value_id">
+                  <block wx:if="{{specValue.selected}}">
+                    <block wx:if="{{specValue.spec_value_name.length == 1}}">
+                      <view class="btn-spec-value-selected-one">
+                        <text class="btn-spec-value-text-selected">{{specValue.spec_value_name}}</text>
+                      </view>
+                    </block>
+                    <block wx:else>
+                      <view class="btn-spec-value-selected-two">
+                        <text class="btn-spec-value-text-selected">{{specValue.spec_value_name}}</text>
+                      </view>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <block wx:if="{{specValue.spec_value_name.length == 1}}">
+                      <view class="btn-spec-value-one" data-spec-id="{{spec.spec_id}}" data-spec-value-id="{{specValue.spec_value_id}}" catch:tap="onSpecValueTap">
+                        <text class="btn-spec-value-text">{{specValue.spec_value_name}}</text>
+                      </view>
+                    </block>
+                    <block wx:else>
+                      <view class="btn-spec-value-two" data-spec-id="{{spec.spec_id}}" data-spec-value-id="{{specValue.spec_value_id}}" catch:tap="onSpecValueTap">
+                        <text class="btn-spec-value-text">{{specValue.spec_value_name}}</text>
+                      </view>
+                    </block>
+                  </block>
+                </block>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="separater" />
+      <view class="goods-select-footer">
+        <view class="goods-select-footer-info">
+          <view class="goods-select-footer-left">
+            <text class="goods-select-price">￥{{util.formatPrice(curPrice * curNum)}}</text>
+          </view>
+          <view class="goods-select-footer-right">
+            <view class="num">
+              <block wx:if="{{curNum > 1}}">
+                <image class="btn-operation-sub" src="/resources/images/sub.png" catch:tap="onSubTap" />
+              </block>
+              <block wx:else>
+                <image class="btn-operation-sub" src="/resources/images/sub_disable.png" />
+              </block>
+              <text class="current-num">{{curNum}}</text>
+              <image class="btn-operation-add" src="/resources/images/add.png" catch:tap="onAddTap" />
+            </view>
+          </view>
+        </view>
+        <view class="name-add-to-cart">
+          <view class="name-add-to-cart-left">
+            <text class="goods-select-name">{{curGoods.goodsName}}</text>
+            <text class="goods-select-sku">{{curSku}}</text>
+          </view>
+          <view class="name-add-to-cart-right">
+            <view class="btn-add-to-cart" catch:tap="onAddToCartTap">
+              <text class="btn-add-to-cart-text">加入购物车</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cart" wx:if="{{isShowCartBg}}">
+    <view class="cart-bg {{isShowCart ? 'show' : ''}}" catch:tap="onCartClose" />
+    <view class="cart-modal {{isShowCart ? 'show' : ''}}" style="height:{{cartHeight}}rpx">
+      <view class="cart-arrow" catch:tap="onCartClose">
+        <image class="cart-arrow-icon" src="/resources/images/arrow_down.png" />
+      </view>
+      <view class="gradient" />
+      <scroll-view class="cart-list" scroll-y>
+        <block wx:for="{{carts}}" wx:key="cartId">
+          <view class="cart-goods">
+            <view class="cart-goods-left">
+              <text class="cart-goods-name">{{item.goods_name}}</text>
+              <text class="cart-sku-name">{{item.sku_name}}</text>
+            </view>
+            <view class="cart-goods-right">
+              <view class="cart-num">
+                <image class="cart-btn-operation-sub" src="/resources/images/sub.png" data-cart-id="{{item.id}}" catch:tap="onSubCartTap" />
+                  <text class="cart-current-num">{{item.num}}</text>
+                <image class="cart-btn-operation-add" src="/resources/images/add.png" data-cart-id="{{item.id}}" catch:tap="onAddCartTap" />
+              </view>
+            </view>
+          </view>
+          <view class="cart-goods-separater" wx:if="{{index < carts.length - 1}}" />
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="bottom-line" />
+</view>
+
+<template is="authorize" data="{{isShowAuthorize:isShowAuthorize}}" />

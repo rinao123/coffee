@@ -1,0 +1,528 @@
+/* pages/order_detail/order_detail.wxss */
+
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.order-detail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  background-color: #f1f1f1;
+}
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 186rpx;
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.btn-navigation-back {
+  position: absolute;
+  top: 90rpx;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85rpx;
+  height: 85rpx;
+}
+
+.back-icon {
+  width: 22rpx;
+  height: 36rpx;
+}
+
+.navigation-title {
+  position: absolute;
+  top: 106rpx;
+  left: 302rpx;
+  font-size: 37rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-detail-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 212rpx;
+  margin-left: 36rpx;
+  margin-right: 36rpx;
+  width: 678rpx;
+  background-color: #ffffff;
+  border-radius: 6rpx;
+}
+
+.order-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.order-desc {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 36rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-status-text {
+  margin-top: 48rpx;
+  margin-left: 60rpx;
+  margin-bottom: 40rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-info-text {
+  margin-left: 60rpx;
+  margin-bottom: 14rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.dashed {
+  width: 100%;
+  height: 25rpx;
+}
+
+.btn-order-detail {
+  display: flex;
+  align-items: center;
+  margin-left: 60rpx;
+  margin-bottom: 60rpx;
+}
+
+.white {
+  width: 100%;
+  height: 50rpx;
+}
+
+.btn-order-detail-text {
+  font-size: 30rpx;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-order-detail-arrow {
+  margin-left: 11rpx;
+  width: 16rpx;
+  height: 9rpx;
+  opacity: 0.5;
+  transform: rotate(0);
+  transition: all 0.2s;
+}
+
+.btn-order-detail-arrow.hide {
+  transform: rotate(-90deg);
+}
+
+.order-num {
+  display: flex;
+  align-items: center;
+  margin-left: 60rpx;
+}
+
+.order-price-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-price-num {
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  font-family: "WeChat Sans Std Medium";
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-num-right {
+  flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.total-num-text {
+  margin-right: 60rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-delivering {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 320rpx;
+}
+
+.shipping-type {
+  position: absolute;
+  top: 20rpx;
+  left: 30rpx;
+  font-size: 24rpx;
+  color: #b8b8b8;
+}
+
+.address {
+  position: absolute;
+  top: 50rpx;
+  left: 30rpx;
+  font-size: 24rpx;
+  color: #b8b8b8;
+}
+
+.order-no {
+  margin-top: -10rpx;
+  margin-bottom: -10rpx;
+  font-size: 130rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-state {
+  font-size: 30rpx;
+}
+
+.order-remark {
+  width: 100%;
+}
+
+.order-remark-title {
+  margin-left: 40rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.order-remark-text {
+  margin-left: 92rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.order-time-title {
+  margin-left: 40rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.order-date {
+  margin-left: 44rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.order-time {
+  margin-left: 50rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.order-detail-finish {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.finish-title {
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+}
+
+.finish-shipping-type {
+  display: flex;
+  margin-top: 30rpx;
+  margin-left: 40rpx;
+}
+
+.finish-shipping-type-title {
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.finish-shipping-type-text {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.finish-remark {
+  display: flex;
+  margin-top: 5rpx;
+  margin-left: 40rpx;
+}
+
+.finish-remark-title {
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.finish-remark-text {
+  margin-left: 68rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.finish-date-time {
+  display: flex;
+  margin-top: 5rpx;
+  margin-left: 40rpx;
+}
+
+.finish-time-title {
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.finish-date {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.finish-time {
+  margin-left: 50rpx;
+  font-size: 24rpx;
+  color: #bebebe;
+}
+
+.goods-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50rpx;
+  margin-left: 60rpx;
+  margin-bottom: 32rpx;
+}
+
+.separater {
+  margin-bottom: 40rpx;
+  width: 558rpx;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.goods-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+  width: 558rpx;
+  height: 120rpx;
+}
+
+.goods-item-picture {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+}
+
+.goods-item-mid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 28rpx;
+  height: 100%;
+}
+
+.goods-item-name {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.goods-item-sku {
+  margin-top: 4rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.goods-item-price {
+  position: absolute;
+  top: 88rpx;
+  font-size: 26rpx;
+  font-family: "WeChat Sans Std Regular";
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.goods-item-num {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.order-no-title {
+  margin-top: 60rpx;
+  font-size: 30rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.order-no {
+  margin-top: -10rpx;
+  font-size: 92rpx;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 22rpx;
+  width: 100%;
+}
+
+.step-icons {
+  display: flex;
+  align-items: center;
+}
+
+.step-icon {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.step-icon-active {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background-color: #ac9157;
+}
+
+.step-line {
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  width: 160rpx;
+  height: 2rpx;
+  background-color: #d8d8d8;
+}
+
+.step-line-short {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  width: 92rpx;
+  height: 2rpx;
+  background-color: #d8d8d8;
+}
+
+.step-titles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18rpx;
+  margin-left: 60rpx;
+  margin-right: 60rpx;
+  margin-bottom: 38rpx;
+}
+
+.step-title {
+  margin-left: 144rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.step-title-active {
+  margin-left: 144rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.step-title-first-active {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.step-title-short {
+  margin-left: 66rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.step-title-short-active {
+  margin-left: 66rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.step-title-short-first-active {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.buy-again {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.btn-buy-again {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 50rpx;
+  margin-bottom: 62rpx;
+  width: 160rpx;
+  height: 60rpx;
+  background-color: #ac9157;
+  border-radius: 38rpx;
+}
+
+.btn-buy-again-text {
+  font-size: 26rpx;
+  color: #ffffff;
+}
+
+.iphone-x-bottom {
+  width: 100%;
+  height: 68rpx;
+  background-color: #f1f1f1;
+}
+
+.dashed-view {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.semi-circle-left {
+  width: 12rpx;
+  height: 24rpx;
+  background-color: #f1f1f1;
+  border-radius: 12rpx 0 0 12rpx;
+}
+
+.semi-circle-right {
+  width: 12rpx;
+  height: 24rpx;
+  background-color: #f1f1f1;
+  border-radius: 0 12rpx 12rpx 0;
+}
+
+.dashed-line {
+  width: 654rpx;
+  height: 1px;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  border: none;
+  border-top: 1px dashed rgba(0, 0, 0, 0.05);
+}

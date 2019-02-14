@@ -1,0 +1,29 @@
+<template name="authorize">
+  <view class="authorize" wx:if="{{isShowAuthorize}}">
+    <view class="authorize-bg" />
+    <view class="authorize-modal">
+      <text class="authorize-title">微信授权</text>
+      <view class="authorize-separater" />
+      <image class="authorize-logo" src="/images/authorize_logo.png" />
+      <text class="authorize-content-text">使用须知:</text>
+      <view class="authorize-separater2" />
+      <view class="authorize-tips">
+        <view class="authorize-circle" />
+        <text class="authorize-tips-text">WeStore Cafe将获得你的昵称信息</text>
+      </view>
+      <view class="authorize-tips2">
+        <view class="authorize-circle" />
+        <text class="authorize-tips-text">该小程序仅限腾员工及已登记访客使用</text>
+      </view>
+      <view class="authorize-separater3" />
+      <view class="authorize-btns">
+        <view class="btn-authorize-cancel" catch:tap="onAuthorizeCancel">
+          <text class="btn-authorize-cancel-text">拒绝</text>
+        </view>
+        <button class="btn-authorize-confirm" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+          <text class="btn-authorize-confirm-text">同意</text>
+        </button>
+      </view>
+    </view>
+  </view>
+</template>

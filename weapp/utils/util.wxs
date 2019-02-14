@@ -1,0 +1,11 @@
+module.exports.formatPrice = function(price){
+  if (typeof price == "number"){
+    price = price * 100 / 100;
+    return price.toFixed(2);
+  } else if (typeof price == "string"){
+    price = parseFloat(price) * 100 / 100
+    return price.toFixed(2);
+  }else{
+    return price;
+  }
+}

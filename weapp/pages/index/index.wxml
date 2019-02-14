@@ -1,0 +1,3 @@
+<!--pages/index/index.wxml-->
+
+<image class="splash" mode="aspectFill" src="/resources/images/splash.jpg" />

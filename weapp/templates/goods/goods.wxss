@@ -1,0 +1,54 @@
+.goods-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+  width: 100%;
+  height: 120rpx;
+}
+
+.goods-item-picture {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+}
+
+.goods-item-mid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 28rpx;
+  height: 100%;
+}
+
+.goods-item-name {
+  width: 420rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.goods-item-sku {
+  margin-top: 4rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.goods-item-price {
+  position: absolute;
+  top: 88rpx;
+  font-size: 26rpx;
+  font-family: "WeChat Sans Std Regular";
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.goods-item-num {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.9);
+}

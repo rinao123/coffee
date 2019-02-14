@@ -1,0 +1,191 @@
+<!--pages/order_detail/order_detail.wxml-->
+<wxs src="../../utils/util.wxs" module="util" />
+<wxs src="../../common/defines.wxs" module="defines" />
+
+<view class="order-detail">
+  <view class="navigation">
+    <view class="btn-navigation-back" catch:tap="onBackTap">
+      <image class="back-icon" src="/resources/images/back.png" />
+    </view>
+    <text class="navigation-title">订单详情</text>
+  </view>
+  <view class="order-detail-container" catch:tap="onShowOrderDetailTap">
+    <view class="order-status" wx:if="{{order.orderStatus > defines.ORDER_STATUS.UNPAID && order.orderStatus < defines.ORDER_STATUS.FINISH}}">
+      <text class="order-no-title">取单号</text>
+      <text class="order-no">{{order.orderNo}}</text>
+      <block wx:if="{{order.shippingType == defines.SHIPPING_TYPE.WAITING}}">
+        <view class="steps">
+          <view class="step-icons">
+            <view class="step-icon-active" />
+            <view class="step-line" />
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.MAKING}}">
+              <view class="step-icon-active" />
+            </block>
+            <block wx:else>
+              <view class="step-icon" />
+            </block>
+            <view class="step-line" />
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DELIVERING}}">
+              <view class="step-icon-active" />
+            </block>
+            <block wx:else>
+              <view class="step-icon" />
+            </block>
+          </view>
+          <view class="step-titles">
+            <text class="step-title-first-active">已接单</text>
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.MAKING}}">
+              <text class="step-title-active">制作中</text>
+            </block>
+            <block wx:else>
+              <text class="step-title">制作中</text>
+            </block>
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DELIVERING}}">
+              <text class="step-title-active">请取餐</text>
+            </block>
+            <block wx:else>
+              <text class="step-title">请取餐</text>
+            </block>
+          </view>
+        </view>
+      </block>
+      <block wx:elif="{{order.shippingType == defines.SHIPPING_TYPE.ORDER}}">
+        <view class="steps">
+          <view class="step-icons">
+            <view class="step-icon-active" />
+            <view class="step-line" />
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DELIVERING}}">
+              <view class="step-icon-active" />
+            </block>
+            <block wx:else>
+              <view class="step-icon" />
+            </block>
+          </view>
+          <view class="step-titles">
+            <text class="step-title-first-active">已接单</text>
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DELIVERING}}">
+              <text class="step-title-active">请取餐</text>
+            </block>
+            <block wx:else>
+              <text class="step-title">请取餐</text>
+            </block>
+          </view>
+        </view>
+      </block>
+      <block wx:elif="{{order.shippingType == defines.SHIPPING_TYPE.DELIVERY}}">
+        <view class="steps">
+          <view class="step-icons">
+            <view class="step-icon-active" />
+            <view class="step-line-short" />
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.MAKING}}">
+              <view class="step-icon-active" />
+            </block>
+            <block wx:else>
+              <view class="step-icon" />
+            </block>
+            <view class="step-line-short" />
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DISPATCHING}}">
+              <view class="step-icon-active" />
+            </block>
+            <block wx:else>
+              <view class="step-icon" />
+            </block>
+            <view class="step-line-short" />
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DELIVERING}}">
+              <view class="step-icon-active" />
+            </block>
+            <block wx:else>
+              <view class="step-icon" />
+            </block>
+          </view>
+          <view class="step-titles">
+            <text class="step-title-short-first-active">已接单</text>
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.MAKING}}">
+              <text class="step-title-short-active">制作中</text>
+            </block>
+            <block wx:else>
+              <text class="step-title-short">制作中</text>
+            </block>
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DISPATCHING}}">
+              <text class="step-title-short-active">配送中</text>
+            </block>
+            <block wx:else>
+              <text class="step-title-short">配送中</text>
+            </block>
+            <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.DELIVERING}}">
+              <text class="step-title-short-active">请取餐</text>
+            </block>
+            <block wx:else>
+              <text class="step-title-short">请取餐</text>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="dashed-view" wx:if="{{order.orderStatus > defines.ORDER_STATUS.UNPAID && order.orderStatus < defines.ORDER_STATUS.FINISH}}">
+      <view class="semi-circle-right" />
+      <view class="dashed-line" />
+      <view class="semi-circle-left" />
+    </view>
+    <view class="order-info">
+      <view class="order-desc">
+        <block wx:if="{{order.orderStatus >= defines.ORDER_STATUS.FINISH}}">
+          <text class="order-status-text">订单已完成</text>
+        </block>
+        <block wx:else>
+          <block wx:if="{{order.shippingType == defines.SHIPPING_TYPE.WAITING}}">
+            <text class="order-status-text">现场取货</text>
+          </block>
+          <block wx:elif="{{order.shippingType == defines.SHIPPING_TYPE.ORDER}}">
+            <text class="order-status-text">预约取货</text>
+          </block>
+          <block wx:elif="{{order.shippingType == defines.SHIPPING_TYPE.DELIVERY}}">
+            <text class="order-status-text">外卖</text>
+          </block>
+        </block>
+        <text class="order-info-text">取货地址：{{order.receiverAddress}}</text>
+        <text class="order-info-text" wx:if="{{order.buyerMessage}}">备注：{{order.buyerMessage}}</text>
+        <text class="order-info-text" wx:if="{{order.shippingType == defines.SHIPPING_TYPE.ORDER}}">预约时间：{{shippingDate}} / {{shippingTime}}</text>
+        <text class="order-info-text">订单时间：{{orderDate}} / {{orderTime}}</text>
+        <text class="order-info-text" wx:if="{{order.point > 0}}">订单消耗积分：{{order.point}}分</text>
+      </view>
+      <view class="dashed-view">
+        <view class="semi-circle-right" />
+        <view class="dashed-line" />
+        <view class="semi-circle-left" />
+      </view>
+      <view class="white" />
+      <view class="btn-order-detail" wx:if="{{order.orderStatus < defines.ORDER_STATUS.FINISH}}">
+        <text class="btn-order-detail-text">订单详情</text>
+        <image class="btn-order-detail-arrow {{ isShowOrderDetail ? '' : 'hide' }}" src="/resources/images/arrow_down.png" />
+      </view>
+      <view class="order-num" wx:if="{{isShowOrderDetail}}">
+        <text class="order-price-title">合计:</text>
+        <text class="order-price-num">¥{{util.formatPrice(order.orderMoney)}}</text>
+        <view class="order-num-right">
+          <text class="total-num-text">共{{totalNum}}件商品</text>
+        </view>
+      </view>
+    </view>
+    <view class="goods-list" wx:if="{{isShowOrderDetail}}">
+      <block wx:for="{{order.goodsList}}" wx:key="goodsId">
+        <view class="goods-item">
+          <image class="goods-item-picture" src="{{item.goodsPicture}}" />
+          <view class="goods-item-mid">
+            <text class="goods-item-name">{{item.goodsName}}</text>
+            <text class="goods-item-sku">{{item.skuName}}</text>
+            <text class="goods-item-price">¥{{util.formatPrice(item.price)}}</text>
+          </view>
+          <text class="goods-item-num">×{{item.num}}</text>
+        </view>
+        <view class="separater" wx:if="{{index < order.goodsList.length - 1}}" />
+      </block>
+    </view>
+    <view class="buy-again" wx:if="{{order.orderStatus >= defines.ORDER_STATUS.FINISH}}">
+      <view class="btn-buy-again" catch:tap="buyAgain">
+        <text class="btn-buy-again-text">再来一单</text>
+      </view>
+    </view>
+  </view>
+  <view class="iphone-x-bottom" wx:if="{{isIphoneX}}" />
+</view>

@@ -1,0 +1,13 @@
+<wxs src="../../utils/util.wxs" module="util" />
+
+<template name="goods-item">
+  <view class="goods-item">
+    <image class="goods-item-picture" src="{{picture}}" />
+    <view class="goods-item-mid">
+      <text class="goods-item-name">{{name}}</text>
+      <text class="goods-item-sku">{{sku}}</text>
+      <text class="goods-item-price">¥{{util.formatPrice(price)}}</text>
+    </view>
+    <text class="goods-item-num">×{{num}}</text>
+  </view>
+</template>

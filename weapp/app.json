@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/home/home",
+    "pages/order/order",
+    "pages/balance/balance",
+    "pages/order_detail/order_detail",
+    "pages/authorize/authorize"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#ac9157",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "菜单",
+        "iconPath": "/resources/images/menu.png",
+        "selectedIconPath": "/resources/images/menu_selected.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "我的订单",
+        "iconPath": "/resources/images/order.png",
+        "selectedIconPath": "/resources/images/order_selected.png"
+      }
+    ]
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx13cd90577cccdba5"
+  ]
+}

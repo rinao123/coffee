@@ -1,0 +1,11 @@
+<!--pages/authorize/authorize.wxml-->
+
+<view class="authorize">
+  <view class="space" />
+  <image class="logo" src="/resources/images/logo.jpg" />
+  <text class="tips">我们需要您的授权方可提供更好的服务\n您的隐私数据将受到保护</text>
+  <button class="btn-authorize" open-type="getUserInfo" bindgetuserinfo="authorize">
+    <image class="btn-authorize-icon" src="/resources/images/wechat.png" />
+    <text class="btn-authorize-text">微信授权登录</text>
+  </button>
+</view>
